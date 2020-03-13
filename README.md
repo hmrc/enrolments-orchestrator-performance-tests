@@ -10,12 +10,12 @@ It might be useful to try the journey with one user to check that everything wor
 Simply in terminal run: 
 ./run-local.sh
 OR run the following two lines
-sm --start SECURITY_DELETE_ORCHESTRATOR_ALL -f --wait 60 --noprogress
+sm --start ENROLMENTS_ORCHESTRATOR AUTH DATASTREAM USER_DETAILS TAX_ENROLMENTS -f --wait 60 --noprogress
 sbt -Dperftest.runSmokeTest=true gatling:test
 ```
 
 ### Run a full performance test (Local)
 ```
-sm --start SECURITY_DELETE_ORCHESTRATOR_ALL -f --wait 60 --noprogress
+sm --start ENROLMENTS_ORCHESTRATOR AUTH DATASTREAM USER_DETAILS TAX_ENROLMENTS -f --wait 60 --noprogress
 sbt gatling:test
 ```
