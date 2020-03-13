@@ -1,8 +1,21 @@
 
 # enrolments-orchestrator-performance-tests
 
-This is a placeholder README.md for a new repository
+Repository for holding enrolments-orchestrator performance testing journeys.
 
-### License
+### Smoke test (Local)
 
-This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
+It might be useful to try the journey with one user to check that everything works fine before running a full performance test
+```
+Simply in terminal run: 
+./run-local.sh
+OR run the following two lines
+sm --start SECURITY_DELETE_ORCHESTRATOR_ALL -f --wait 60 --noprogress
+sbt -Dperftest.runSmokeTest=true gatling:test
+```
+
+### Run a full performance test (Local)
+```
+sm --start SECURITY_DELETE_ORCHESTRATOR_ALL -f --wait 60 --noprogress
+sbt gatling:test
+```
