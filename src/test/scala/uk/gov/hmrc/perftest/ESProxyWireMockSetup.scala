@@ -8,14 +8,14 @@ import com.github.tomakehurst.wiremock.stubbing.StubMapping
 
 trait ESProxyWireMockSetup {
 
-  val wiremockHost: String = "localhost"
-  val wiremockPort: Int = 9595
-  val wireMockServer = new WireMockServer(wireMockConfig().port(wiremockPort))
-  WireMock.configureFor(wiremockHost, wiremockPort)
+  val enrolmentStoreWireMockHost: String = "localhost"
+  val enrolmentStoreWireMockPort: Int = 9595
+  val wireMockEnrolmentStoreServer = new WireMockServer(wireMockConfig().port(enrolmentStoreWireMockPort))
 
   def mockTaxEnrolmentsES9(arn: String): StubMapping = {
 
-    wireMockServer.start()
+    WireMock.configureFor(enrolmentStoreWireMockHost, enrolmentStoreWireMockPort)
+    wireMockEnrolmentStoreServer.start()
 
     def enrolmentKey = s"HMRC-AS-AGENT~AgentReferenceNumber~$arn"
     def GROUP_ID = "90ccf333-65d2-4bf2-a008-01dfca702161"

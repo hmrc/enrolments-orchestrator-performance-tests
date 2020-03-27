@@ -8,14 +8,14 @@ import io.gatling.http.Predef.{HttpHeaderNames, http, status}
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
-trait UrlHelper extends ServicesConfiguration with ESProxyWireMockSetup {
+trait UrlHelper extends ServicesConfiguration with ESProxyWireMockSetup with AgentStatusChangeWireMockSetup {
 
   val TOKEN: String = s"Basic ${Base64.getEncoder.encodeToString("AgentTermDESUser:password".getBytes(UTF_8))}"
   val AUTHORIZATION_HEADER: Map[String, String] = Map((HttpHeaderNames.Authorization, TOKEN))
   val ARN = "arn1225942976"
 
   def callDeletePoint(): HttpRequestBuilder = {
-
+    agentStatusChangeReturnOK
     mockTaxEnrolmentsES9(ARN)
     http(s"Call the orchestrator for $ARN")
       .delete(deletePoint(ARN))
